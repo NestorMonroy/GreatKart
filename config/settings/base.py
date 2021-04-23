@@ -45,6 +45,8 @@ THIRD_PARTY_APPS = [
     "src.home.apps.HomeAppConfig",
     "src.category.apps.CategoryAppConfig",
     "src.accounts.apps.AccountsAppConfig",
+    "src.store.apps.StoreConfig",
+
 ]
 LOCAL_APPS = [
 ]
