@@ -43,6 +43,7 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     "src.home.apps.HomeAppConfig",
+    "src.category.apps.CategoryAppConfig",
 ]
 LOCAL_APPS = [
 ]
@@ -150,4 +151,4 @@ MANAGERS = ADMINS
 # LOGIN_REDIRECT_URL = "users:login"
 LOGOUT_REDIRECT_URL = "/"
 
-DEFAULT_ACTIVATION_DAYS = 7
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
