@@ -1,0 +1,23 @@
+# Base
+pytz==2021.1
+python-slugify==4.0.1
+pycparser==2.20
+Pillow==8.2.0
+psycopg2==2.8.6 --no-binary psycopg2
+six==1.15.0
+text-unidecode==1.3
+
+# Django
+Django==3.2
+
+# Environment
+django-environ==0.4.5
+
+
+# Passwords security
+argon2-cffi==20.1.0
+
+# Static files
+whitenoise==5.2.0
+
+
