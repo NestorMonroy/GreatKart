@@ -9,7 +9,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: src_local_django
+    image: greatkart_local_django
     depends_on:
       - postgres
     volumes:
@@ -24,7 +24,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: src_production_postgres
+    image: greatkart_production_postgres
     volumes:
       - local_postgres_data:/var/lib/postgresql/data
       - local_postgres_data_backups:/backups

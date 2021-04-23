@@ -44,6 +44,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "src.home.apps.HomeAppConfig",
     "src.category.apps.CategoryAppConfig",
+    "src.accounts.apps.AccountsAppConfig",
 ]
 LOCAL_APPS = [
 ]
@@ -145,7 +146,7 @@ MANAGERS = ADMINS
 
 
 # User & Authentication
-# AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "accounts.Account"
 
 # LOGIN_URL = "users:login"
 # LOGIN_REDIRECT_URL = "users:login"

@@ -10,7 +10,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: src_production_django
+    image: greatkart_production_django
     depends_on:
       - postgres
     env_file:
@@ -22,7 +22,7 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: src_production_postgres
+    image: greatkart_production_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
