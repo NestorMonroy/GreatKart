@@ -6,6 +6,20 @@ from src.category.models import Category
 from .models import Product
 
 
+def product_detail(request, category_slug, product_slug):
+    try:
+        single_product = Product.objects.get(
+            category__slug=category_slug, slug=product_slug
+        )
+    except Exception as e:
+        raise e
+
+    ctx = {
+        "single_product": single_product,
+    }
+    return render(request, "store/product_detail.html", ctx)
+
+
 def store(request, category_slug=None):
     # search by categories
     categories = None
