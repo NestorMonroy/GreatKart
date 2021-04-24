@@ -3,7 +3,12 @@ from django.core.paginator import Paginator
 
 
 from src.category.models import Category
+from src.carts.models import CartItem
+
 from .models import Product
+
+
+from src.carts.views import _cart_id
 
 
 def product_detail(request, category_slug, product_slug):
@@ -11,11 +16,15 @@ def product_detail(request, category_slug, product_slug):
         single_product = Product.objects.get(
             category__slug=category_slug, slug=product_slug
         )
+        in_cart = CartItem.objects.filter(
+            cart__cart_id=_cart_id(request), product=single_product
+        ).exists()
     except Exception as e:
         raise e
 
     ctx = {
         "single_product": single_product,
+        'in_cart': in_cart,
     }
     return render(request, "store/product_detail.html", ctx)
 
