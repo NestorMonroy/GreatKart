@@ -13,5 +13,6 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     path("", include(("src.home.urls", "home"), namespace="home")),
     path("store/", include(("src.store.urls", "store"), namespace="store")),
+    path("cart/", include(("src.carts.urls", "cart"), namespace="cart")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
