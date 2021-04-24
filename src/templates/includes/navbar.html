@@ -107,9 +107,9 @@
             <div class="widget-header">
               <small class="title text-muted">Welcome guest!</small>
               <div>
-                <a href="">Sign in</a>
+                <a href="{% url 'accounts:login' %}">Sign in</a>
                 <span class="dark-transp"> | </span>
-                <a href=""> Register</a>
+                <a href="{% url 'accounts:register' %}"> Register</a>
               </div>
             </div>
             {% else %}
@@ -120,7 +120,7 @@
               <div>
                 <a href="">Dashboard</a>
                 <span class="dark-transp"> | </span>
-                <a href=""> Logout</a>
+                <a href="{% url 'accounts:logout' %}"> Logout</a>
               </div>
             </div>
             {% endif %}
