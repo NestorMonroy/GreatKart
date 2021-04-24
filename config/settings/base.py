@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = [
     "src.category.apps.CategoryAppConfig",
     "src.accounts.apps.AccountsAppConfig",
     "src.store.apps.StoreConfig",
+    "src.carts.apps.CartsAppConfig",
 
 ]
 LOCAL_APPS = [

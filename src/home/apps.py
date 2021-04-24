@@ -6,4 +6,4 @@ class HomeAppConfig(AppConfig):
     """ User app config """
 
     name = 'src.home'
-    verbose_name = 'Home'
+    verbose_name = 'home'
