@@ -2,7 +2,6 @@
 
 <section class="section-content padding-y bg">
   <div class="container">
-    <!-- ============================ COMPONENT 1 ================================= -->
     <div class="card">
       <div class="row no-gutters">
         <aside class="col-md-6">
@@ -15,15 +14,12 @@
           <!-- gallery-wrap .end// -->
           <ul class="thumb">
             <li>
-              <a href="{{ single_product.images.url }}" target="mainImage"></a>
+              <a href="{{ single_product.images.url }}" target="mainImage" ></a>
             </li>
           </ul>
         </aside>
         <main class="col-md-6 border-left">
-          <form
-            action="{% url 'cart:add_cart' single_product.id %}"
-            method="POST"
-          >
+          <form action="{% url 'cart:add_cart' single_product.id %}" method="POST">
             {% csrf_token %}
             <article class="content-body">
               <h2 class="title">{{ single_product.product_name }}</h2>
@@ -66,9 +62,7 @@
                   <select name="color" class="form-control" required>
                     <option value="" disabled selected>Select</option>
                     {% for i in single_product.variation_set.colors %}
-                    <option value="{{ i.variation_value | lower }}"
-                      >{{ i.variation_value | capfirst }}</option
-                    >
+                    <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
                     {% endfor %}
                   </select>
                 </div>
@@ -79,9 +73,7 @@
                   <select name="size" class="form-control" required>
                     <option value="" disabled selected>Select</option>
                     {% for i in single_product.variation_set.sizes %}
-                    <option value="{{ i.variation_value | lower }}"
-                      >{{ i.variation_value | capfirst }}</option
-                    >
+                    <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
                     {% endfor %}
                   </select>
                 </div>
@@ -104,8 +96,6 @@
       <!-- row.// -->
     </div>
     <!-- card.// -->
-    <!-- ============================ COMPONENT 1 END .// ================================= -->
-
     <br />
 
     <div class="row">
@@ -190,6 +180,5 @@
   </div>
   <!-- container .//  -->
 </section>
-<!-- ========================= SECTION CONTENT END// ========================= -->
 
 {% endblock %}
