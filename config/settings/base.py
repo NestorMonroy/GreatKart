@@ -47,10 +47,9 @@ THIRD_PARTY_APPS = [
     "src.accounts.apps.AccountsAppConfig",
     "src.store.apps.StoreConfig",
     "src.carts.apps.CartsAppConfig",
-
+    "src.orders.apps.OrdersAppConfig",
 ]
-LOCAL_APPS = [
-]
+LOCAL_APPS = []
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # Passwords
@@ -124,8 +123,8 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                'src.category.context_processors.menu_links',
-                'src.carts.context_processors.counter',
+                "src.category.context_processors.menu_links",
+                "src.carts.context_processors.counter",
             ],
         },
     },
@@ -157,9 +156,10 @@ AUTH_USER_MODEL = "accounts.Account"
 # LOGIN_REDIRECT_URL = "users:login"
 LOGOUT_REDIRECT_URL = "/"
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 from django.contrib.messages import constants as messages
+
 MESSAGE_TAGS = {
-    messages.ERROR: 'danger',
+    messages.ERROR: "danger",
 }
