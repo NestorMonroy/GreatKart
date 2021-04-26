@@ -114,16 +114,16 @@ def add_cart(request, product_id):
             id = []
             for item in cart_item:
                 existing_variation = item.variations.all()
-                #print(existing_variation)
+                # print(existing_variation)
                 ex_var_list.append(list(existing_variation))
                 id.append(item.id)
 
-            #print(product_variation)
-            #print(ex_var_list)
+            # print(product_variation)
+            # print(ex_var_list)
             if product_variation in ex_var_list:
                 # increase the cart item quantity
                 index = ex_var_list.index(product_variation)
-                
+
                 item_id = id[index]
                 print(item_id)
                 item = CartItem.objects.get(product=product, id=item_id)
@@ -226,7 +226,7 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         for cart_item in cart_items:
             total += cart_item.product.price * cart_item.quantity
             quantity += cart_item.quantity
-        tax = (2 * total) / 100
+        tax = round((1.16 * total) / 100, 2)
         grand_total = total + tax
     except ObjectDoesNotExist:
         pass  # just ignore
