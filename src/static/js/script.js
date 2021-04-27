@@ -56,6 +56,7 @@ $(document).ready(function() {
     var ano = new Date().getFullYear();
     $("#yearf").text(ano);
     
+    
 }); 
 // jquery end
 
