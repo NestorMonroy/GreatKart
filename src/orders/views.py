@@ -3,14 +3,19 @@ import json
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+
+
 from src.carts.models import CartItem
+from src.store.models import Product
 from .models import Order, OrderProduct, Payment
 from .forms import OrderForm
 
 
 def payments(request):
     body = json.loads(request.body)
-    print(body)
+    #print(body)
     order = Order.objects.get(
         user=request.user, is_ordered=False, order_number=body["orderID"]
     )
@@ -57,18 +62,18 @@ def payments(request):
     # Clear cart
     CartItem.objects.filter(user=request.user).delete()
 
-    # Send order recieved email to customer
-    # mail_subject = "Thank you for your order!"
-    # message = render_to_string(
-    #     "orders/order_recieved_email.html",
-    #     {
-    #         "user": request.user,
-    #         "order": order,
-    #     },
-    # )
-    # to_email = request.user.email
-    # send_email = EmailMessage(mail_subject, message, to=[to_email])
-    # send_email.send()
+    #Send order recieved email to customer
+    mail_subject = "Thank you for your order!"
+    message = render_to_string(
+        "orders/order_recieved_email.html",
+        {
+            "user": request.user,
+            "order": order,
+        },
+    )
+    to_email = request.user.email
+    send_email = EmailMessage(mail_subject, message, to=[to_email])
+    send_email.send()
 
     # Send order number and transaction id back to sendData method via JsonResponse
     data = {
@@ -78,11 +83,7 @@ def payments(request):
     return JsonResponse(data)
 
 
-def place_order(
-    request,
-    total=0,
-    quantity=0,
-):
+def place_order(request, total=0, quantity=0):
     current_user = request.user
 
     # If the cart count is less than or equal to 0, then redirect back to shop
