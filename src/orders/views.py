@@ -142,8 +142,8 @@ def place_order(request, total=0, quantity=0):
                 "grand_total": grand_total,
             }
             return render(request, "orders/payments.html", context)
-    # else:
-    #     return redirect("checkout")
+    else:
+        return redirect("carts:checkout")
 
 
 def order_complete(request):
