@@ -143,7 +143,7 @@ EMAIL_BACKEND = env(
 )
 
 # Admin
-ADMIN_URL = "securelogin/"
+ADMIN_URL = "/"
 ADMINS = [
     ("""Nestor Monroy""", "nestor.monroy.90@gmail.com"),
 ]
