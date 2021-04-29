@@ -268,7 +268,7 @@ Session.vim
 
 ### Project template
 
-src/media/
+src/media/*
 
 .pytest_cache/
 
