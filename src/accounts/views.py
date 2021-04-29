@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 
@@ -16,8 +16,8 @@ from src.carts.views import _cart_id
 from src.carts.models import Cart, CartItem
 from src.orders.models import Order
 
-from .models import Account
-from .forms import RegistrationForm
+from .models import Account, UserProfile
+from .forms import RegistrationForm, UserForm, UserProfileForm
 
 
 def register(request):
@@ -85,7 +85,7 @@ def login(request):
                     for item in cart_item:
                         variation = item.variations.all()
                         product_variation.append(list(variation))
-                    
+
                     # Get the cart items from the user to access his product variations
                     cart_item = CartItem.objects.filter(user=user)
                     ex_var_list = []
@@ -94,7 +94,7 @@ def login(request):
                         existing_variation = item.variations.all()
                         ex_var_list.append(list(existing_variation))
                         id.append(item.id)
-                    
+
                     # product_variation = [1, 2, 3, 4, 6]
                     # ex_var_list = [4, 6, 3, 5]
                     for pr in product_variation:
@@ -113,18 +113,18 @@ def login(request):
             except:
                 pass
             auth.login(request, user)
-            url = request.META.get('HTTP_REFERER')
+            url = request.META.get("HTTP_REFERER")
             try:
                 query = requests.utils.urlparse(url).query
-                #print('-->', query)
-                #next=/cart/checkout/
-                params = dict(x.split('=') for x in query.split('&'))
+                # print('-->', query)
+                # next=/cart/checkout/
+                params = dict(x.split("=") for x in query.split("&"))
 
-                if 'next' in params:
-                    nextPage = params['next']
+                if "next" in params:
+                    nextPage = params["next"]
                     return redirect(nextPage)
             except:
-                return redirect('accounts:dashboard')            
+                return redirect("accounts:dashboard")
         else:
             messages.error(request, "Invalid login credentials")
             return redirect("accounts:login")
@@ -230,12 +230,37 @@ def resetPassword(request):
         return render(request, "accounts/resetPassword.html")
 
 
-
-
-@login_required(login_url='login')
+@login_required(login_url="accounts:login")
 def my_orders(request):
-    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by(
+        "-created_at"
+    )
     ctx = {
-        'orders': orders,
+        "orders": orders,
     }
-    return render(request, 'accounts/my_orders.html', ctx)
+    return render(request, "accounts/my_orders.html", ctx)
+
+
+@login_required(login_url="accounts:login")
+def edit_profile(request):
+    userprofile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == "POST":
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = UserProfileForm(
+            request.POST, request.FILES, instance=userprofile
+        )
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "Your profile has been updated.")
+            return redirect("accounts:edit_profile")
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = UserProfileForm(instance=userprofile)
+
+    ctx = {
+        "user_form": user_form,
+        "profile_form": profile_form,
+        "userprofile": userprofile,
+    }
+    return render(request, "accounts/edit_profile.html", ctx)
