@@ -49,7 +49,7 @@ THIRD_PARTY_APPS = [
     "src.carts.apps.CartsAppConfig",
     "src.orders.apps.OrdersAppConfig",
 ]
-LOCAL_APPS = []
+LOCAL_APPS = ["admin_honeypot"]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 # Passwords
@@ -142,7 +142,7 @@ EMAIL_BACKEND = env(
 )
 
 # Admin
-ADMIN_URL = "admin/"
+ADMIN_URL = "securelogin/"
 ADMINS = [
     ("""Nestor Monroy""", "nestor.monroy.90@gmail.com"),
 ]

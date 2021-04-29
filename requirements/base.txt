@@ -10,6 +10,8 @@ requests==2.25.1
 
 # Django
 Django==3.2
+#Fake Django admin
+django-admin-honeypot==1.1.0
 
 # Environment
 django-environ==0.4.5

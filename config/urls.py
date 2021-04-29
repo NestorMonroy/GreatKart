@@ -10,6 +10,7 @@ from django.contrib import admin
 
 urlpatterns = [
     # Django Admin
+    path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path(settings.ADMIN_URL, admin.site.urls),
     path("", include(("src.home.urls", "home"), namespace="home")),
     path("store/", include(("src.store.urls", "store"), namespace="store")),
