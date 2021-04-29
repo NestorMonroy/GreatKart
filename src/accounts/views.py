@@ -39,6 +39,12 @@ def register(request):
             )
             user.phone_number = phone_number
             user.save()
+            
+            # Create a user profile
+            profile = UserProfile()
+            profile.user_id = user.id
+            profile.profile_picture = 'default/default-user.png'
+            profile.save()
 
             # USER ACTIVATION
             current_site = get_current_site(request)
@@ -156,7 +162,7 @@ def activate(request, uidb64, token):
         return redirect("accounts:register")
 
 
-@login_required(login_url="login")
+@login_required(login_url="accounts:login")
 def dashboard(request):
     ctx = {}
     return render(request, "accounts/dashboard.html", ctx)
