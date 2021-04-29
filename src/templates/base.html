@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="pragma" content="no-cache" />
@@ -42,6 +43,10 @@
 
     // jquery ready start
     $(document).ready(function () {
+      $(".thumb a").click(function (e) {
+        e.preventDefault();
+        $(".mainImage img").attr("src", $(this).attr("href"));
+      });
       // jQuery code
     });
       // jquery end
