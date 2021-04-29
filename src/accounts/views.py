@@ -14,7 +14,7 @@ from django.core.mail import EmailMessage
 
 from src.carts.views import _cart_id
 from src.carts.models import Cart, CartItem
-
+from src.orders.models import Order
 
 from .models import Account
 from .forms import RegistrationForm
@@ -228,3 +228,14 @@ def resetPassword(request):
             return redirect("accounts:resetPassword")
     else:
         return render(request, "accounts/resetPassword.html")
+
+
+
+
+@login_required(login_url='login')
+def my_orders(request):
+    orders = Order.objects.filter(user=request.user, is_ordered=True).order_by('-created_at')
+    ctx = {
+        'orders': orders,
+    }
+    return render(request, 'accounts/my_orders.html', ctx)
